@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const html = `
           <h1>Hey!</h1>
           <p>Mehul this side :)</p>
+          <img src="cid: "unique27.info"  width="400" />
 
 `;
 
@@ -29,9 +30,22 @@ async function main() {
     subject: "Nodemailer Test",
     text: "Hello",
     html: html,
+    attachments: [
+      {
+        filename: "1.jpeg",
+        path: process.env.USER_IMG1,
+        cid: "unique27.info",
+      },
+      {
+        filename: "2.jpg",
+        path: process.env.USER_IMG2,
+      },
+    ],
   });
 
   console.log("Message sent: ", info.messageId);
+  console.log(info.accepted);
+  console.log(info.rejected);
 }
 
 main().catch((e) => console.log(e));
